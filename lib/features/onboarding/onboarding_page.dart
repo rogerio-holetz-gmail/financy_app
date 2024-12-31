@@ -50,9 +50,25 @@ class OnboardingPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  Text('Already Have Account? log in',
-                      style:
-                          AppTextStyles.text14.copyWith(color: AppColors.grey)),
+                  TextButton(
+                    onPressed: () {
+                      debugPrint('Logando...');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Already Have Account?',
+                          style: AppTextStyles.text14
+                              .copyWith(color: AppColors.grey),
+                        ),
+                        Text(' Log in',
+                            style: AppTextStyles.text14
+                                .copyWith(color: AppColors.greeLightTwo)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
