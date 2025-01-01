@@ -17,7 +17,7 @@ class OnboardingPage extends StatelessWidget {
             flex: 2,
             child: Padding(
               padding: const EdgeInsets.only(top: 40),
-              child: Image.asset('assets/images/man.png'),
+              child: Image.asset('assets/images/OnboardingImage.png'),
             ),
           ),
           Expanded(
@@ -39,9 +39,10 @@ class OnboardingPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
+                    padding: const EdgeInsets.only(
+                      left: 32,
+                      right: 32,
+                      top: 16,
                     ),
                     child: PrimaryButton(
                       textButton: 'Get Started',
