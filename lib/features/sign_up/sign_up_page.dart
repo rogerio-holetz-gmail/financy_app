@@ -9,57 +9,66 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              'Start Saving',
-              style:
-                  AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
-            ),
-            Text(
-              'Your Money!',
-              style:
-                  AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
-            ),
-            Expanded(
-              child: Image.asset('assets/images/ToDoList.png'),
-            ),
-            TextFormField(),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 32,
-                right: 32,
-                top: 16,
-                bottom: 4,
-              ),
-              child: PrimaryButton(
-                textButton: 'Sign Up',
-                onPressed: () {
-                  debugPrint('Teste');
-                },
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                debugPrint('Logando...');
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Already Have Account?',
-                    style: AppTextStyles.text14.copyWith(color: AppColors.grey),
+      body: Column(
+        children: [
+          Text(
+            'Start Saving',
+            style: AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
+          ),
+          Text(
+            'Your Money!',
+            style: AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
+          ),
+          Expanded(
+            child: Image.asset('assets/images/ToDoList.png'),
+          ),
+          Form(
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Your Name',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.greeLightOne),
+                    ),
                   ),
-                  Text(' Log in',
-                      style: AppTextStyles.text14
-                          .copyWith(color: AppColors.greeLightTwo)),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 32,
+              right: 32,
+              top: 16,
+              bottom: 4,
+            ),
+            child: PrimaryButton(
+              textButton: 'Sign Up',
+              onPressed: () {
+                debugPrint('Teste');
+              },
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              debugPrint('Logando...');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Already Have Account?',
+                  style: AppTextStyles.text14.copyWith(color: AppColors.grey),
+                ),
+                Text(' Log in',
+                    style: AppTextStyles.text14
+                        .copyWith(color: AppColors.greeLightTwo)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
