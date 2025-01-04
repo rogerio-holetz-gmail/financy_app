@@ -22,16 +22,12 @@ class SignUpPage extends StatelessWidget {
           Expanded(
             child: Image.asset('assets/images/ToDoList.png'),
           ),
-          Form(
+          const Form(
             child: Column(
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Your Name',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.greeLightOne),
-                    ),
-                  ),
+                CustomTextFormField(
+                  labelText: 'Name',
+                  hintText: 'Your name',
                 ),
               ],
             ),
@@ -60,7 +56,8 @@ class SignUpPage extends StatelessWidget {
               children: [
                 Text(
                   'Already Have Account?',
-                  style: AppTextStyles.text14.copyWith(color: AppColors.grey),
+                  style:
+                      AppTextStyles.text14.copyWith(color: AppColors.darkGrey),
                 ),
                 Text(' Log in',
                     style: AppTextStyles.text14
@@ -69,6 +66,75 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomTextFormField extends StatefulWidget {
+  final EdgeInsetsGeometry? padding;
+  final String? hintText;
+  final String labelText;
+  final TextCapitalization? textCapitalization;
+  final TextEditingController? controller;
+  final TextInputType? keyBoardType;
+  final int? maxLenght;
+  final TextInputAction? textInputAction;
+  const CustomTextFormField(
+      {super.key,
+      this.padding,
+      this.hintText,
+      required this.labelText,
+      this.textCapitalization,
+      this.controller,
+      this.keyBoardType,
+      this.maxLenght,
+      this.textInputAction});
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  final defaultBorder = const OutlineInputBorder(
+    borderSide: BorderSide(
+      color: AppColors.greeLightTwo,
+    ),
+  );
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: widget.padding ??
+          const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 12,
+          ),
+      child: TextFormField(
+        textInputAction: widget.textInputAction,
+        maxLength: widget.maxLenght,
+        keyboardType: widget.keyBoardType,
+        controller: widget.controller,
+        textCapitalization:
+            widget.textCapitalization ?? TextCapitalization.none,
+        decoration: InputDecoration(
+          hintText: widget.hintText,
+          labelText: widget.labelText.toUpperCase(),
+          labelStyle: AppTextStyles.text14.copyWith(color: AppColors.grey),
+          border: defaultBorder,
+          focusedBorder: defaultBorder,
+          errorBorder: defaultBorder.copyWith(
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedErrorBorder: defaultBorder.copyWith(
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          enabledBorder: defaultBorder,
+          disabledBorder: defaultBorder,
+        ),
       ),
     );
   }
