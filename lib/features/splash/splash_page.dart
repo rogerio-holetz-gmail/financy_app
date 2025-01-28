@@ -15,8 +15,8 @@ class SplashPage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.greeLightOne,
-              AppColors.greeLightTwo,
+              AppColors.greenOne,
+              AppColors.greenTwo,
             ],
           ),
         ),

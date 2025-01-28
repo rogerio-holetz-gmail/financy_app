@@ -2,8 +2,8 @@ import 'dart:ui';
 
 class AppColors {
   AppColors._();
-  static const Color greeLightOne = Color(0xFF63B5Af);
-  static const Color greeLightTwo = Color(0xFF438883);
+  static const Color greenOne = Color(0xFF63B5Af);
+  static const Color greenTwo = Color(0xFF438883);
   static const Color white = Color(0xFFFFFFFF);
   static const Color iceWhite = Color(0xFFEEF8F7);
   static const Color darkGrey = Color(0xFF444444);

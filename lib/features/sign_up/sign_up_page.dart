@@ -1,11 +1,20 @@
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/app_text_styles.dart';
 import 'package:financy_app/common/widgets/custom_text_form_field.dart';
+import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
+import 'package:financy_app/common/utils/uppercase_text_formatter.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +23,40 @@ class SignUpPage extends StatelessWidget {
         children: [
           Text(
             'Start Saving',
-            style: AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
+            style: AppTextStyles.text36.copyWith(color: AppColors.greenTwo),
           ),
           Text(
             'Your Money!',
-            style: AppTextStyles.text36.copyWith(color: AppColors.greeLightTwo),
+            style: AppTextStyles.text36.copyWith(color: AppColors.greenTwo),
           ),
           Expanded(
             child: Image.asset('assets/images/ToDoList.png'),
           ),
-          const Form(
+          Form(
+            key: _formKey,
             child: Column(
               children: [
                 CustomTextFormField(
                   labelText: 'Name',
                   hintText: 'Your name',
+                  inputFormatters: [
+                    UpperCaseInputTextFormatter(),
+                  ],
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return 'Esse campo não pode ser vazio.';
+                    }
+                    debugPrint(value);
+                    return null;
+                  },
+                ),
+                const PasswordFormField(
+                  labelText: 'Choose your Password',
+                  hintText: '**********',
+                ),
+                const PasswordFormField(
+                  labelText: 'Confirm your Password',
+                  hintText: '**********',
                 ),
               ],
             ),
@@ -43,7 +71,15 @@ class SignUpPage extends StatelessWidget {
             child: PrimaryButton(
               textButton: 'Sign Up',
               onPressed: () {
-                debugPrint('Teste');
+                final valid = _formKey.currentState != null &&
+                    _formKey.currentState!.validate();
+                debugPrint(valid.toString());
+                if (valid) {
+                  //Salva as informações
+                  debugPrint('Informações enviadas ao servidor');
+                } else {
+                  debugPrint('Ocorreu algum erro...');
+                }
               },
             ),
           ),
@@ -62,7 +98,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 Text(' Log in',
                     style: AppTextStyles.text14
-                        .copyWith(color: AppColors.greeLightTwo)),
+                        .copyWith(color: AppColors.greenTwo)),
               ],
             ),
           ),
