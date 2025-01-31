@@ -18,6 +18,8 @@ class CustomTextFormField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   //final String? Function(String?)? validator;
   final FormFieldValidator<String>? validator;
+  final String? helperText;
+  final int? helperMaxLine;
 
   const CustomTextFormField({
     Key? key,
@@ -33,6 +35,8 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText,
     this.inputFormatters,
     this.validator,
+    this.helperText,
+    this.helperMaxLine,
   }) : super(key: key);
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -44,6 +48,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       color: AppColors.greenTwo,
     ),
   );
+
+  String? _helperText;
+
+  @override
+  void initState() {
+    _helperText = widget.helperText;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -53,6 +66,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             vertical: 12,
           ),
       child: TextFormField(
+        onChanged: (value) {
+          if (value.isEmpty) {
+            setState(() {
+              _helperText = widget.helperText;
+            });
+          } else {
+            setState(() {
+              _helperText = null;
+            });
+          }
+        },
         validator: widget.validator,
         style: AppTextStyles.inputText.copyWith(color: AppColors.greenOne),
         inputFormatters: widget.inputFormatters,
@@ -64,6 +88,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         textCapitalization:
             widget.textCapitalization ?? TextCapitalization.none,
         decoration: InputDecoration(
+          helperText: _helperText, //widget.helperText,
+          helperMaxLines: widget.helperMaxLine,
           suffixIcon: widget.sufixIcon,
           hintText: widget.hintText,
           labelText: widget.labelText?.toUpperCase(),

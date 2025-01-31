@@ -51,6 +51,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                 ),
                 const PasswordFormField(
+                  helperText:
+                      "A senha deve ter ao menos 8 caracteres, 1 letra maiúscula",
+                  helperMaxLine: 3,
                   labelText: 'Choose your Password',
                   hintText: '**********',
                 ),
