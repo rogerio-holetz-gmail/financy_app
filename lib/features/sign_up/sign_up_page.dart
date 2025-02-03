@@ -1,5 +1,6 @@
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/app_text_styles.dart';
+import 'package:financy_app/common/utils/validator.dart';
 import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
@@ -15,6 +16,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +39,29 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               children: [
                 CustomTextFormField(
+                  errorMaxLine: 3,
+                  helperMaxLine: 3,
                   labelText: 'Name',
                   hintText: 'Your name',
                   inputFormatters: [
                     UpperCaseInputTextFormatter(),
                   ],
-                  validator: (value) {
-                    if (value != null && value.isEmpty) {
-                      return 'Esse campo não pode ser vazio.';
-                    }
-                    debugPrint(value);
-                    return null;
-                  },
+                  validator: Validator.validateName,
                 ),
-                const PasswordFormField(
+                PasswordFormField(
+                  errorMaxLine: 3,
+                  controller: _passwordController,
                   helperText:
                       "A senha deve ter ao menos 8 caracteres, 1 letra maiúscula",
                   helperMaxLine: 3,
                   labelText: 'Choose your Password',
                   hintText: '**********',
                 ),
-                const PasswordFormField(
+                PasswordFormField(
+                  errorMaxLine: 3,
+                  helperMaxLine: 3,
+                  validator: (value) => Validator.validateConfirmPassword(
+                      value, _passwordController.text),
                   labelText: 'Confirm your Password',
                   hintText: '**********',
                 ),

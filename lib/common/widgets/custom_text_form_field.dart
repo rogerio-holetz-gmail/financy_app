@@ -20,6 +20,7 @@ class CustomTextFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? helperText;
   final int? helperMaxLine;
+  final int? errorMaxLine;
 
   const CustomTextFormField({
     Key? key,
@@ -37,6 +38,7 @@ class CustomTextFormField extends StatefulWidget {
     this.validator,
     this.helperText,
     this.helperMaxLine,
+    this.errorMaxLine,
   }) : super(key: key);
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -88,6 +90,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         textCapitalization:
             widget.textCapitalization ?? TextCapitalization.none,
         decoration: InputDecoration(
+          errorMaxLines: widget.errorMaxLine,
           helperText: _helperText, //widget.helperText,
           helperMaxLines: widget.helperMaxLine,
           suffixIcon: widget.sufixIcon,
