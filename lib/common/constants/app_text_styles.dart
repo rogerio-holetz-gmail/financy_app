@@ -17,6 +17,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
   );
+  static const TextStyle text20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Inter',
+  );
   static const TextStyle text14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,

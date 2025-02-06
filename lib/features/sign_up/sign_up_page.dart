@@ -1,11 +1,16 @@
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/app_text_styles.dart';
 import 'package:financy_app/common/utils/validator.dart';
+import 'package:financy_app/common/widgets/custom_bottom_sheet.dart';
+import 'package:financy_app/common/widgets/custom_circular_progress_indicator.dart';
 import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
 import 'package:financy_app/common/utils/uppercase_text_formatter.dart';
+import 'package:financy_app/features/sign_up/sign_up_controller.dart';
+import 'package:financy_app/features/sign_up/sign_up_state.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,6 +22,44 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _passwordController = TextEditingController();
+  final _controller = SignUpController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    //_controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      if (_controller.state is SignUpLoadingState) {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CustomCircularProgressIndicator()));
+      }
+      if (_controller.state is SignUpSuccessState) {
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Scaffold(
+              body: Center(
+                child: Text('Oi'),
+              ),
+            ),
+          ),
+        );
+      }
+      if (_controller.state is SignUpErrorState) {
+        Navigator.pop(context);
+        customModalBottomSheet(context);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +123,12 @@ class _SignUpPageState extends State<SignUpPage> {
               onPressed: () {
                 final valid = _formKey.currentState != null &&
                     _formKey.currentState!.validate();
-                debugPrint(valid.toString());
+                //debugPrint(valid.toString());
                 if (valid) {
-                  //Salva as informações
-                  debugPrint('Informações enviadas ao servidor');
+                  //developer.log(SignUpState.state.toString());
+                  _controller.doSignUp();
                 } else {
-                  debugPrint('Ocorreu algum erro...');
+                  developer.log('Ocorreu algum erro...');
                 }
               },
             ),
