@@ -20,7 +20,7 @@ class SignUpController extends ChangeNotifier {
         const Duration(seconds: 2),
       );
 
-      throw Exception("Erro ao logar");
+      //throw Exception("Erro ao logar");
 
       _changeState(SignUpSuccessState());
       developer.log('Usuário logado');
